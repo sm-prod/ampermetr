@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AMP</class>
+ <widget class="QMainWindow" name="AMP">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>745</width>
+    <height>625</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>AMP</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="5" column="0">
+     <widget class="QLineEdit" name="sendString">
+      <property name="maximumSize">
+       <size>
+        <width>350</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0">
+     <widget class="QTextBrowser" name="textBrowser">
+      <property name="maximumSize">
+       <size>
+        <width>350</width>
+        <height>16777215</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2">
+     <layout class="QGridLayout" name="gridLayoutCentral">
+      <item row="0" column="0">
+       <widget class="QComboBox" name="AmpPortBox">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="searchAmpButton">
+        <property name="text">
+         <string>Поиск</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="disconnectAmpButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Отключиться</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="connectAmpButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Подключиться</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="4" column="1">
+     <layout class="QGridLayout" name="gridLayoutMod"/>
+    </item>
+    <item row="4" column="0">
+     <widget class="QPushButton" name="sendAmpButton">
+      <property name="maximumSize">
+       <size>
+        <width>350</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Отправить команду</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLabel" name="labelModChange">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1" colspan="2">
+     <widget class="QCustomPlot" name="graphic" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>500</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>745</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="saveGraph"/>
+    <addaction name="saveText"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Настройки</string>
+    </property>
+    <widget class="QMenu" name="menuChangeMod">
+     <property name="title">
+      <string>Выбор режима</string>
+     </property>
+     <property name="toolTipsVisible">
+      <bool>true</bool>
+     </property>
+     <addaction name="setMod_0"/>
+     <addaction name="setMod_1"/>
+     <addaction name="setMod_2"/>
+    </widget>
+    <addaction name="menuChangeMod"/>
+    <addaction name="actionClean"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menu"/>
+  </widget>
+  <action name="setMod_0">
+   <property name="text">
+    <string>ВАХ</string>
+   </property>
+   <property name="toolTip">
+    <string>Вольт-амперная хар-ка</string>
+   </property>
+  </action>
+  <action name="setMod_1">
+   <property name="text">
+    <string>ТАХ</string>
+   </property>
+   <property name="toolTip">
+    <string>Термо-амперная хар-ка</string>
+   </property>
+  </action>
+  <action name="setMod_2">
+   <property name="text">
+    <string>АВХ</string>
+   </property>
+   <property name="toolTip">
+    <string>Ампер-временная хар-ка</string>
+   </property>
+  </action>
+  <action name="actionClean">
+   <property name="text">
+    <string>Отчистить</string>
+   </property>
+  </action>
+  <action name="saveGraph">
+   <property name="text">
+    <string>Сохранить график</string>
+   </property>
+  </action>
+  <action name="saveText">
+   <property name="text">
+    <string>Сохранить текстовый файл</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
