@@ -209,10 +209,11 @@ void Keithley6487::writeValueAmpTime(QByteArray Data)
 	currentValues.append(Data.toDouble());
 	uiTextBrowser->insertPlainText(QByteArray::number(timeElapsed)+"\t"+Data+"\n");
 
-
 	//Установим область, которая будет показываться на графике
-	uiGraphic->xAxis->setRange(0, timeElapsed);//Для оси Ox
-	uiGraphic->yAxis->setRange(currentValues.first(), currentValues.last());//Для оси Oy
+	if(!holdXAxis)
+		uiGraphic->xAxis->setRange(0, timeElapsed);//Для оси Ox
+	if(!holdYAxis)
+		uiGraphic->yAxis->setRange(currentValues.first(), currentValues.last());//Для оси Oy
 
 	uiGraphic->graph(0)->setData(tempValues, currentValues);
 	uiGraphic->replot();
@@ -306,6 +307,8 @@ bool Keithley6487::changeMod0()
 	uiGridLayoutMod->addWidget(labelTime,4,0,1,2);
 	uiGridLayoutMod->addWidget(label_MesurTime,4,2);
 	uiGridLayoutMod->addWidget(startButton,5,0,1,3);
+
+	selectedMod=0;
 	return true;
 }
 
@@ -356,6 +359,7 @@ bool Keithley6487::changeMod1()
 	uiGridLayoutMod->addWidget(disconnectTempButton,2,1);
 	uiGridLayoutMod->addWidget(startButton,3,0,1,2);
 
+	selectedMod=1;
 	return true;
 }
 
@@ -398,6 +402,7 @@ bool Keithley6487::changeMod2()
 	uiGridLayoutMod->addWidget(TimeMesur_SpinBox,1,1,1,2);
 	uiGridLayoutMod->addWidget(startButton,2,0,1,3);
 
+	selectedMod=2;
 	return true;
 }
 
@@ -574,4 +579,57 @@ void Keithley6487::cleanMod()
 		delete serialTemp;
 		serialTemp=0;
 	}
+}
+
+void Keithley6487::getAxisRange(const char axis, double *axisRange)
+{
+	if(axis=='X')
+	{
+		switch(selectedMod)
+		{
+		case 0:
+		{
+			axisRange[0]=voltValues.first();
+			axisRange[1]=voltValues.last();
+			break;
+		}
+		case 1:
+		{
+			axisRange[0]=tempValues.first();
+			axisRange[1]=tempValues.last();
+			break;
+		}
+		case 2:
+		{
+			axisRange[0]=tempValues.first();
+			axisRange[1]=tempValues.last();
+			break;
+		}
+		}
+	}
+	else if(axis=='Y')
+	{
+		axisRange[0]=currentValues.first();
+		axisRange[1]=currentValues.last();
+	}
+}
+
+void Keithley6487::holdAxisRange(char axis)
+{
+	if(axis=='X')
+		holdXAxis=true;
+	if(axis=='Y')
+		holdYAxis=true;
+	if(axis=='A')
+	{
+		holdXAxis=true;
+		holdYAxis=true;
+	}
+}
+void Keithley6487::unholdAxisRange(char axis)
+{
+	if(axis=='X')
+		holdXAxis=false;
+	if(axis=='Y')
+		holdYAxis=false;
 }

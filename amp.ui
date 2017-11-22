@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>745</width>
-    <height>625</height>
+    <width>900</width>
+    <height>653</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,6 +15,22 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="11" column="3" colspan="2">
+     <widget class="QCustomPlot" name="graphic" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>500</height>
+       </size>
+      </property>
+     </widget>
+    </item>
     <item row="5" column="0">
      <widget class="QLineEdit" name="sendString">
       <property name="maximumSize">
@@ -28,17 +44,20 @@
       </property>
      </widget>
     </item>
-    <item row="11" column="0">
-     <widget class="QTextBrowser" name="textBrowser">
-      <property name="maximumSize">
-       <size>
-        <width>350</width>
-        <height>16777215</height>
-       </size>
+    <item row="4" column="3">
+     <layout class="QGridLayout" name="gridLayoutMod"/>
+    </item>
+    <item row="5" column="3">
+     <widget class="QLabel" name="labelModChange">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
-    <item row="4" column="2">
+    <item row="4" column="4">
      <layout class="QGridLayout" name="gridLayoutCentral">
       <item row="0" column="0">
        <widget class="QComboBox" name="AmpPortBox">
@@ -76,9 +95,6 @@
       </item>
      </layout>
     </item>
-    <item row="4" column="1">
-     <layout class="QGridLayout" name="gridLayoutMod"/>
-    </item>
     <item row="4" column="0">
      <widget class="QPushButton" name="sendAmpButton">
       <property name="maximumSize">
@@ -92,31 +108,87 @@
       </property>
      </widget>
     </item>
-    <item row="5" column="1">
-     <widget class="QLabel" name="labelModChange">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="1" colspan="2">
-     <widget class="QCustomPlot" name="graphic" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
+    <item row="11" column="0" rowspan="3">
+     <widget class="QTextBrowser" name="textBrowser">
+      <property name="maximumSize">
        <size>
-        <width>400</width>
-        <height>500</height>
+        <width>350</width>
+        <height>16777215</height>
        </size>
       </property>
      </widget>
+    </item>
+    <item row="11" column="2">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QSlider" name="yAxisSlider">
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+        <property name="sliderPosition">
+         <number>50</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinBoxGraphicCoefY">
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>39</height>
+         </size>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="12" column="3" colspan="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QSpinBox" name="spinBoxGraphicCoefX">
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="xAxisSlider">
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -125,7 +197,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>745</width>
+     <width>900</width>
      <height>21</height>
     </rect>
    </property>

@@ -49,6 +49,14 @@ private slots:
 
 	void on_saveText_triggered();
 
+	void on_yAxisSlider_valueChanged(int value);
+
+	void on_spinBoxGraphicCoefY_valueChanged(int arg1);
+
+	void on_xAxisSlider_valueChanged(int value);
+
+	void on_spinBoxGraphicCoefX_valueChanged(int arg1);
+
 private:
     Ui::AMP *ui;
 

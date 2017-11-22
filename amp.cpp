@@ -26,6 +26,7 @@
 #include <QEventLoop>
 #include <QFlags>
 #include <QMouseEvent>
+#include <QAbstractScrollArea>
 
 
 //QString fname;
@@ -159,4 +160,46 @@ void AMP::on_saveText_triggered()
 		stream << ui->textBrowser->toPlainText();//QObject::trUtf8( "Проверка!" );
 		out.close();
 	}
+}
+
+void AMP::on_yAxisSlider_valueChanged(int value)
+{
+	ui->spinBoxGraphicCoefY->setValue(value);
+	if(value==50)
+		ammeter->unholdAxisRange('Y');
+	else
+		ammeter->holdAxisRange('Y');
+	double y0[2]={};
+	double y1[2]={};//Границы, которые есть, новые границы
+	ammeter->getAxisRange('Y',y0);
+	y1[0]=y0[0]*(double)((value+50.0)/100.0);
+	y1[1]=y0[1]*(double)((value+50.0)/100.0);
+	ui->graphic->yAxis->setRange(y1[0], y1[1]);//Для оси Oy
+	ui->graphic->replot();
+}
+
+void AMP::on_spinBoxGraphicCoefY_valueChanged(int arg1)
+{
+	ui->yAxisSlider->setValue(arg1);
+}
+
+void AMP::on_xAxisSlider_valueChanged(int value)
+{
+	ui->spinBoxGraphicCoefX->setValue(value);
+	if(value==50)
+		ammeter->unholdAxisRange('X');
+	else
+		ammeter->holdAxisRange('X');
+	double x0[2]={};
+	double x1[2]={};//Границы, которые есть, новые границы
+	ammeter->getAxisRange('X',x0);
+	x1[0]=x0[0]*(double)((value+50.0)/100.0);
+	x1[1]=x0[1]*(double)((value+50.0)/100.0);
+	ui->graphic->xAxis->setRange(x1[0], x1[1]);//Для оси Oy
+	ui->graphic->replot();
+}
+
+void AMP::on_spinBoxGraphicCoefX_valueChanged(int arg1)
+{
+	ui->xAxisSlider->setValue(arg1);
 }

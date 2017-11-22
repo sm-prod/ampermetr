@@ -23,6 +23,10 @@ public:
 	bool getSerialStatus(int dev);
 	void sendAmpCom(QString input);
 	void clearVect(char unit=0);
+	void getAxisRange(const char axis, double *axisRange);
+	void holdAxisRange(char axis='A');
+	void unholdAxisRange(char axis);
+
 signals:
 	void processEnd();
 
@@ -100,6 +104,9 @@ private:
 	QVector<double> voltValues;
 	QVector<double> tempValues;
 	int timeMesur;
+	int selectedMod=-1;
+	bool holdXAxis=false;
+	bool holdYAxis=false;
 
 	QLabel *label_FirstStep=0;
 
