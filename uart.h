@@ -39,7 +39,7 @@ private:
 	QByteArray serialData;
 	QSerialPort *serialUart;
 	QString portName;
-	bool statusCon;
+	bool statusCon=false;
 	Lib func;
 
 };

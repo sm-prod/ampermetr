@@ -242,8 +242,7 @@ void Keithley6487::writeData(QByteArray Data)
 	QTextCursor cur = uiTextBrowser->textCursor();
 	cur.movePosition(QTextCursor::End);
 	uiTextBrowser->setTextCursor(cur);
-	uiTextBrowser->insertPlainText(Data+"\n");
-	currentValues.append(Data.toDouble());
+	uiTextBrowser->insertPlainText(Data);
 }
 
 bool Keithley6487::changeMod0()
@@ -450,7 +449,7 @@ void Keithley6487::startMod0()
 
 void Keithley6487::startMod1()
 {
-	if (serialTemp->getStatus())
+	if (serialTemp->getStatus() && serialKeithley->getStatus())
 	{
 		//
 		//Достаю значения из setting'ов
