@@ -383,7 +383,7 @@ bool Keithley6487::changeMod2()
 	TimeMesur_SpinBox = new QSpinBox();
 	connect(TimeMesur_SpinBox, SIGNAL(valueChanged(int)), this, SLOT(on_TimeMesur_SpinBox_valueChanged(int)));
 	TimeMesur_SpinBox->setSuffix("c");
-	TimeMesur_SpinBox->setMaximum(6000);
+	TimeMesur_SpinBox->setMaximum(300000);
 	TimeMesur_SpinBox->setSingleStep(1);
 	startButton = new QPushButton();
 	if(!serialKeithley->getStatus())
