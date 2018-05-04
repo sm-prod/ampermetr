@@ -14,6 +14,7 @@
 #include <QPushButton>
 #include <QComboBox>
 #include <QLabel>
+#include <QDateTime>
 
 class Keithley6487 : public QObject
 {
@@ -94,7 +95,7 @@ private:
 	uart *serialTemp=0;
 	uart *serialKeithley=0;
 	Lib func;
-	QTime *time;
+	//QTime *time;
 	double stepVolt;//Шаг по оси X             Перенести
 	double startLine;//Начало отсчёта Оx          в файл
 	double endLine;//Конец Оx                  конфигурации
@@ -107,6 +108,8 @@ private:
 	int selectedMod=-1;
 	bool holdXAxis=false;
 	bool holdYAxis=false;
+	QDateTime timeStartMes;
+	QDateTime timeEndMes;
 
 	QLabel *label_FirstStep=0;
 

@@ -204,7 +204,8 @@ void Keithley6487::writeValueAmpTime(QByteArray Data)
 	QTextCursor cur = uiTextBrowser->textCursor();
 	cur.movePosition(QTextCursor::End);
 	uiTextBrowser->setTextCursor(cur);
-	double timeElapsed = time->elapsed()/1000.0;
+	//QDateTime now = QDate
+	double timeElapsed = timeStartMes.secsTo(timeEndMes)-QDateTime::currentDateTime().secsTo(timeEndMes);//time->elapsed()/1000.0;
 	tempValues.append(timeElapsed);
 	currentValues.append(Data.toDouble());
 	uiTextBrowser->insertPlainText(QByteArray::number(timeElapsed)+"\t"+Data+"\n");
@@ -490,18 +491,54 @@ void Keithley6487::startMod2()
 		//
 		//Добавляем один график в widget
 		uiGraphic->addGraph();
-		time = new QTime();
+		//time = new QTime();
 		delete startButton;
 		stopButton = new QPushButton();
 		stopButton->setText("Стоп");
 		stopButton->setCheckable(true);
 		uiGridLayoutMod->addWidget(stopButton,2,0,1,3);
-		time->start();
-		while(time->elapsed()<timeMesur*1000 && !stopButton->isChecked())
+		//time->start();
+//		while(time->elapsed()<timeMesur*1000 && !stopButton->isChecked())
+//		{
+//			mesurI(voltValue);
+//			QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
+//		}
+		int timeMesurMonth=timeMesur/60/60/24/QDate::currentDate().daysInMonth();
+		int timeMesurDay=(timeMesur/60/60/24)-(timeMesurMonth*QDate::currentDate().daysInMonth());
+		int timeMesurHour=(timeMesur/60/60)-(timeMesurDay*24)-(timeMesurMonth*QDate::currentDate().daysInMonth()*24);
+		int timeMesurMinute=(timeMesur/60)-(timeMesurHour*60)-(timeMesurDay*1440)-(timeMesurMonth*QDate::currentDate().daysInMonth()*24*60);
+		int timeMesurSec=timeMesur-(timeMesurMinute*60)-(timeMesurHour*3600)-(timeMesurDay*86400)-(timeMesurMonth*QDate::currentDate().daysInMonth()*24*60*60);
+		if ((QTime::currentTime().second()+timeMesurSec)>59)
+		{
+			timeMesurSec-=60;
+			timeMesurMinute++;
+		}
+		if ((QTime::currentTime().minute()+timeMesurMinute)>59)
+		{
+			timeMesurMinute-=60;
+			timeMesurHour++;
+		}
+		if ((QTime::currentTime().hour()+timeMesurHour)>23)
+		{
+			timeMesurHour-=24;
+			timeMesurDay++;
+		}
+		if (timeMesurDay!=0 && (QDate::currentDate().day()+timeMesurDay)>(timeMesurMonth*QDate::currentDate().daysInMonth()))
+		{
+			timeMesurDay-=timeMesurMonth*QDate::currentDate().daysInMonth();
+			timeMesurMonth++;
+		}
+		timeStartMes = QDateTime::currentDateTime();
+		timeEndMes = QDateTime(QDate(timeStartMes.date().year(), timeStartMes.date().month()+timeMesurMonth, timeStartMes.date().day()+timeMesurDay),
+							   QTime(timeStartMes.time().hour()+timeMesurHour, timeStartMes.time().minute()+timeMesurMinute,
+									 timeStartMes.time().second()+timeMesurSec));
+
+		while(QDateTime::currentDateTime().secsTo(timeEndMes)!=0 && !stopButton->isChecked())
 		{
 			mesurI(voltValue);
 			QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
 		}
+
 		func.delay(1000);
 		QApplication::beep();
 		emit processEnd();
@@ -511,7 +548,7 @@ void Keithley6487::startMod2()
 		connect(startButton, SIGNAL(clicked(bool)), this, SLOT(startMod2()));
 		serialKeithley->sendCom("SOUR:VOLT:STAT OFF\r\n");
 		uiGridLayoutMod->addWidget(startButton,2,0,1,3);
-		delete time;
+		//delete time;
 	}
 	else
 	{
