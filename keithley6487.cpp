@@ -144,7 +144,7 @@ void Keithley6487::on_Step_SpinBox_valueChanged(double arg1)
 
 void Keithley6487::on_TimeMesur_SpinBox_valueChanged(int arg1)
 {
-	timeMesur=arg1;
+	timeMesur=arg1+2;
 }
 
 void Keithley6487::readSerialAmp()
@@ -205,7 +205,7 @@ void Keithley6487::writeValueAmpTime(QByteArray Data)
 	cur.movePosition(QTextCursor::End);
 	uiTextBrowser->setTextCursor(cur);
 	//QDateTime now = QDate
-	double timeElapsed = timeStartMes.secsTo(timeEndMes)-QDateTime::currentDateTime().secsTo(timeEndMes);//time->elapsed()/1000.0;
+	double timeElapsed = (double)(timeStartMes.msecsTo(timeEndMes)-QDateTime::currentDateTime().msecsTo(timeEndMes))/1000.0;//time->elapsed()/1000.0;
 	tempValues.append(timeElapsed);
 	currentValues.append(Data.toDouble());
 	uiTextBrowser->insertPlainText(QByteArray::number(timeElapsed)+"\t"+Data+"\n");
@@ -533,7 +533,7 @@ void Keithley6487::startMod2()
 							   QTime(timeStartMes.time().hour()+timeMesurHour, timeStartMes.time().minute()+timeMesurMinute,
 									 timeStartMes.time().second()+timeMesurSec));
 
-		while(QDateTime::currentDateTime().secsTo(timeEndMes)!=0 && !stopButton->isChecked())
+		while(QDateTime::currentDateTime().secsTo(timeEndMes)!=0 || !stopButton->isChecked())
 		{
 			mesurI(voltValue);
 			QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );

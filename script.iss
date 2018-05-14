@@ -12,11 +12,11 @@
 ; Имя приложения
 #define   Name       "Ampermetr"
 ; Версия приложения
-#define   Version    "1.1"
+#define   Version    "1.2"
 ; Фирма-разработчик
 #define   Publisher  "sm_prod"
 ; Сафт фирмы разработчика
-#define   URL        ""
+#define   URL        "ikomnata.sytes.net"
 ; Имя исполняемого модуля
 #define   ExeName    "ampermetr.exe"
 
@@ -74,10 +74,10 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 
 ; Исполняемый файл
-Source: "C:\project\AMP\ampermetr_32\ampermetr.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\project\AMP\amp_32\ampermetr.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Прилагающиеся ресурсы
-Source: "C:\project\AMP\ampermetr_32\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\project\AMP\amp_32\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 ;    Вставить установочник дров
 ;Source: "C:\project\MAGMID\VideoReg\evicam_demo\driver\*"; DestDir: "{tmp}"; Flags: deleteafterinstall
