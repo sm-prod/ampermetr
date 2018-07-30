@@ -57,6 +57,8 @@ private slots:
 
 	void on_spinBoxGraphicCoefX_valueChanged(int arg1);
 
+	void on_actionMailtoGOD_triggered();
+
 private:
     Ui::AMP *ui;
 

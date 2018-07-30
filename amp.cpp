@@ -203,3 +203,8 @@ void AMP::on_spinBoxGraphicCoefX_valueChanged(int arg1)
 {
 	ui->xAxisSlider->setValue(arg1);
 }
+
+void AMP::on_actionMailtoGOD_triggered()
+{
+	QDesktopServices::openUrl(QUrl("mailto:79164737645@ya.ru?subject=Вопрос к создателю&body=Здравствуйте, создатель.%0AХочу чтобы "));
+}

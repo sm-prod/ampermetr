@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>653</height>
+    <height>655</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -226,8 +226,15 @@
     <addaction name="menuChangeMod"/>
     <addaction name="actionClean"/>
    </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Дополнительно</string>
+    </property>
+    <addaction name="actionMailtoGOD"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <action name="setMod_0">
    <property name="text">
@@ -266,6 +273,11 @@
   <action name="saveText">
    <property name="text">
     <string>Сохранить текстовый файл</string>
+   </property>
+  </action>
+  <action name="actionMailtoGOD">
+   <property name="text">
+    <string>Письмо создателю</string>
    </property>
   </action>
  </widget>
