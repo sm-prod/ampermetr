@@ -271,6 +271,7 @@ bool Keithley6487::changeMod0()
 	StepFirst_SpinBox->setSuffix("В");
 	StepFirst_SpinBox->setDecimals(3);
 	StepFirst_SpinBox->setMaximum(200);
+	StepFirst_SpinBox->setMinimum(-200);
 	StepFirst_SpinBox->setSingleStep(0.05);
 	StepLast_SpinBox = new QDoubleSpinBox();
 	connect(StepLast_SpinBox, SIGNAL(valueChanged(double)), this, SLOT(on_StepLast_SpinBox_valueChanged(double)));
@@ -278,6 +279,7 @@ bool Keithley6487::changeMod0()
 	StepLast_SpinBox->setSuffix("В");
 	StepLast_SpinBox->setDecimals(3);
 	StepLast_SpinBox->setMaximum(200);
+	StepLast_SpinBox->setMinimum(-200);
 	StepLast_SpinBox->setSingleStep(0.05);
 	Step_SpinBox = new QDoubleSpinBox();
 	connect(Step_SpinBox, SIGNAL(valueChanged(double)), this, SLOT(on_Step_SpinBox_valueChanged(double)));
@@ -285,6 +287,7 @@ bool Keithley6487::changeMod0()
 	Step_SpinBox->setSuffix("В");
 	Step_SpinBox->setDecimals(3);
 	Step_SpinBox->setMaximum(200);
+	Step_SpinBox->setMinimum(-200);
 	Step_SpinBox->setSingleStep(0.05);
 	startButton = new QPushButton();
 	if(!serialKeithley->getStatus())
@@ -326,6 +329,7 @@ bool Keithley6487::changeMod1()
 	voltValue_SpinBox->setSuffix("В");
 	voltValue_SpinBox->setDecimals(3);
 	voltValue_SpinBox->setMaximum(200);
+	voltValue_SpinBox->setMinimum(-200);
 	voltValue_SpinBox->setSingleStep(0.5);
 	connect(voltValue_SpinBox, SIGNAL(valueChanged(double)), this, SLOT(on_voltValue_SpinBox_valueChanged(double)));
 	startButton = new QPushButton();
